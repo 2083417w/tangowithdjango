@@ -11,4 +11,7 @@ class PageAdmin(admin.ModelAdmin):
 
 admin.site.register(Page, PageAdmin)
 
+<<<<<<< HEAD
 admin.site.register(UserProfile)
+=======
+>>>>>>> 00ce1efe6b75c907b9127012b28d62cf4445a70c

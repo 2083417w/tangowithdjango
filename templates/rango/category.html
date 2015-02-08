@@ -17,10 +17,14 @@
        {% else %}
           <strong>No pages currently in category.</strong>
        {% endif %}
+<<<<<<< HEAD
 
        {% if user.is_authenticated %}
        <a href="/rango/category/{{ category.slug }}/add_page/">Add a New Page</a><br/>
        {% endif %}
+=======
+       <a href="/rango/category/{{ category.slug }}/add_page/">Add a New Page</a><br/>
+>>>>>>> 00ce1efe6b75c907b9127012b28d62cf4445a70c
     {% else %}
 	  The specified category {{ category_name }} does not exist!
     {% endif %}
