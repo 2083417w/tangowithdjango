@@ -1,17 +1,9 @@
 from django.shortcuts import render
-<<<<<<< HEAD
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from rango.models import Category, Page
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
-=======
-from django.http import HttpResponse
-from rango.models import Category
-from rango.models import Page
-from rango.forms import CategoryForm
-from rango.forms import PageForm
->>>>>>> 00ce1efe6b75c907b9127012b28d62cf4445a70c
 
 def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
@@ -45,10 +37,7 @@ def category(request, category_name_slug):
 
     return render(request, 'rango/category.html', context_dict)
 
-<<<<<<< HEAD
 @login_required
-=======
->>>>>>> 00ce1efe6b75c907b9127012b28d62cf4445a70c
 def add_category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST)
@@ -64,10 +53,7 @@ def add_category(request):
 
     return render(request, 'rango/add_category.html', {'form': form})
 
-<<<<<<< HEAD
 @login_required
-=======
->>>>>>> 00ce1efe6b75c907b9127012b28d62cf4445a70c
 def add_page(request, category_name_slug):
     try:
         cat = Category.objects.get(slug=category_name_slug)
@@ -92,7 +78,6 @@ def add_page(request, category_name_slug):
     context_dict = {'form': form, 'category': cat}
 
     return render(request, 'rango/add_page.html', context_dict)
-<<<<<<< HEAD
 
 def register(request):
     registered = False
@@ -148,12 +133,10 @@ def user_login(request):
 
 @login_required
 def restricted(request):
-    return HttpResponse("Since you're loggd in, you can see this text!")
+    return render(request, 'rango/restricted.html', {})
 
 @login_required
 def user_logout(request):
     logout(request)
 
     return HttpResponseRedirect('/rango/')
-=======
->>>>>>> 00ce1efe6b75c907b9127012b28d62cf4445a70c
