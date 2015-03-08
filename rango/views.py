@@ -54,7 +54,8 @@ def about(request):
 
 def category(request, category_name_slug):
     context_dict = {}
-
+    context_dict['result_list'] = None
+    context_dict['query'] = None
     if request.method == 'POST':
         query = request.POST['query'].strip()
 
@@ -78,6 +79,9 @@ def category(request, category_name_slug):
     except Category.DoesNotExist:
         pass
 
+    if not context_dict['query']:
+        context_dict['query'] = category.name
+        
     return render(request, 'rango/category.html', context_dict)
 
 @login_required
@@ -162,15 +166,20 @@ def search(request):
     return render(request, 'rango/search.html', {'result_list': result_list})
 
 def track_url(request):
+    page_id = None
+    url = '/rango/'
     if request.method == 'GET':
         if 'page_id' in request.GET:
             page_id = request.GET['page_id']
-            page = Page.objects.get(id=page_id)
-            page.views += 1
-            page.save()
-            return redirect(page.url)
+            try:
+                page = Page.objects.get(id=page_id)
+                page.views += 1
+                page.save()
+                url = page.url
+            except:
+                pass
             
-    return redirect(redirectUrl)
+    return redirect(url)
 
 def profile(request, user_name):
     user = User.objects.get(username=user_name)
