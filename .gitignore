@@ -56,6 +56,3 @@ docs/_build/
 
 # PyBuilder
 target/
-
-# keys file
-keys.py
