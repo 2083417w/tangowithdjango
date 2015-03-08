@@ -1,0 +1,28 @@
+{% extends 'rango/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}{{ username }}{% endblock %}
+
+{% block body_block %}
+
+<h1>{{ username }}</h1>
+{% if profile %}
+<ul>
+  {% if profile.website %}
+  <li><a href="{{ profile.website }}">Website</a></li>
+  {% endif %}
+  {% if profile.picture %}
+  <li><img src="{{ profile.picture.url }}" alt="Picture of {{ username }}"/></li>
+  {% endif %}
+</ul>
+{% if username == user.username and user.is_authenticated%}
+<a href="{% url 'add_profile' %}">Edit profile</a>
+{% endif %}
+{% else %}
+<p>No profile exists for {{ username }}</p>
+{% if username == user.username and user.is_authenticated%}
+<a href="{% url 'add_profile' %}">Create a profile</a>
+{% endif %}
+{% endif %}
+{% endblock %}}
